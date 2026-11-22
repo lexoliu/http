@@ -155,9 +155,7 @@
 
 #![deny(warnings, missing_docs, missing_debug_implementations)]
 
-//#![cfg_attr(not(feature = "std"), no_std)]
-#[cfg(not(feature = "std"))]
-compile_error!("`std` feature currently required, support for `no_std` may be added later");
+#![cfg_attr(not(any(feature = "std", test)), no_std)]
 
 #[cfg(test)]
 #[macro_use]
@@ -165,6 +163,10 @@ extern crate doc_comment;
 
 #[cfg(test)]
 doctest!("../README.md");
+
+#[macro_use]
+extern crate alloc;
+
 
 #[macro_use]
 mod convert;

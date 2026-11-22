@@ -1,7 +1,8 @@
-use std::convert::TryFrom;
-use std::fmt;
-use std::hash::{Hash, Hasher};
-use std::str::FromStr;
+use alloc::boxed::Box;
+use core::convert::TryFrom;
+use core::fmt;
+use core::hash::{Hash, Hasher};
+use core::str::FromStr;
 
 use bytes::Bytes;
 
@@ -349,7 +350,7 @@ mod test {
 
     #[test]
     fn standard_scheme_is_case_insensitive() {
-        use std::collections::HashSet;
+        use hashbrown::HashSet;
 
         for (s, expected) in [
             ("HTTP", Scheme::HTTP),
@@ -359,7 +360,7 @@ mod test {
             let parsed = scheme(s);
             assert_eq!(parsed, expected);
             assert_eq!(parsed.as_str(), expected.as_str());
-            assert!(HashSet::from([expected]).contains(&parsed));
+            assert!(HashSet::<Scheme>::from([expected]).contains(&parsed));
         }
     }
 

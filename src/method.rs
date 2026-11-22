@@ -18,10 +18,10 @@
 use self::extension::{AllocatedExtension, InlineExtension};
 use self::Inner::*;
 
-use std::convert::TryFrom;
-use std::error::Error;
-use std::str::FromStr;
-use std::{fmt, str};
+use core::convert::TryFrom;
+use core::error::Error;
+use core::str::FromStr;
+use core::{fmt, str};
 
 /// The Request Method (VERB)
 ///
@@ -195,14 +195,14 @@ impl AsRef<str> for Method {
 
 impl Ord for Method {
     #[inline]
-    fn cmp(&self, other: &Method) -> std::cmp::Ordering {
+    fn cmp(&self, other: &Method) -> core::cmp::Ordering {
         self.as_ref().cmp(other.as_ref())
     }
 }
 
 impl PartialOrd for Method {
     #[inline]
-    fn partial_cmp(&self, other: &Method) -> Option<std::cmp::Ordering> {
+    fn partial_cmp(&self, other: &Method) -> Option<core::cmp::Ordering> {
         Some(self.cmp(other))
     }
 }
@@ -325,8 +325,10 @@ impl fmt::Display for InvalidMethod {
 impl Error for InvalidMethod {}
 
 mod extension {
+    use alloc::boxed::Box;
+    use alloc::vec::Vec;
     use super::InvalidMethod;
-    use std::str;
+    use core::str;
 
     #[derive(Clone, PartialEq, Eq, Hash)]
     // Invariant: the first self.1 bytes of self.0 are valid UTF-8.
