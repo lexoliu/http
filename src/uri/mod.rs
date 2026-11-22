@@ -22,15 +22,18 @@
 //! assert_eq!(uri.path(), "/install.html");
 //! ```
 
+use alloc::boxed::Box;
+use alloc::vec::Vec;
+use alloc::string::String;
 use crate::byte_str::ByteStr;
-use std::convert::TryFrom;
+use core::convert::TryFrom;
 
 use bytes::Bytes;
 
-use std::error::Error;
-use std::fmt;
-use std::hash::{Hash, Hasher};
-use std::str::{self, FromStr};
+use core::error::Error;
+use core::fmt;
+use core::hash::{Hash, Hasher};
+use core::str::{self, FromStr};
 
 use self::scheme::Scheme2;
 

@@ -1,7 +1,8 @@
-use std::any::{type_name, Any, TypeId};
-use std::collections::HashMap;
-use std::fmt;
-use std::hash::{BuildHasherDefault, Hasher};
+use alloc::boxed::Box;
+use core::any::{type_name, Any, TypeId};
+use hashbrown::HashMap;
+use core::fmt;
+use core::hash::{BuildHasherDefault, Hasher};
 
 type AnyMap = HashMap<TypeId, Box<dyn AnyClone + Send + Sync>, BuildHasherDefault<IdHasher>>;
 
